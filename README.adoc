@@ -1,0 +1,8 @@
+= quickfix-validator
+Jens Kötterheinrich <jkh@beckmann-partner.de>
+2020-12-09
+
+= Settings
+
+Add toolchains.xml in your .m2 folder (Maven).
+You have to customize the folders in the file for your environment.
