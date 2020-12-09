@@ -11,7 +11,7 @@
     <properties>
         <quickfixj.version>2.2.0</quickfixj.version>
         <fixprotocol.version>1.6.8</fixprotocol.version>
-        <base.java.version>11</base.java.version>
+        <base.java.version>13</base.java.version>
         <junit.version>5.7.0</junit.version>
         <maven.compiler.source>${base.java.version}</maven.compiler.source>
         <maven.compiler.target>${base.java.version}</maven.compiler.target>
@@ -60,7 +60,10 @@
     </dependencies>
 
     <build>
+
+
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -91,6 +94,10 @@
                     </execution>
                 </executions>
             </plugin>
+
+
+
+
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.22.2</version>
