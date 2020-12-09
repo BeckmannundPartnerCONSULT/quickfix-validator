@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>quickfix-validator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <quickfixj.version>2.2.0</quickfixj.version>
+        <fixprotocol.version>1.6.8</fixprotocol.version>
+        <base.java.version>11</base.java.version>
+        <junit.version>5.7.0</junit.version>
+        <maven.compiler.source>${base.java.version}</maven.compiler.source>
+        <maven.compiler.target>${base.java.version}</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.quickfixj</groupId>
+            <artifactId>quickfixj-core</artifactId>
+            <version>${quickfixj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fixprotocol.orchestra</groupId>
+            <artifactId>interfaces</artifactId>
+            <version>${fixprotocol.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fixprotocol.orchestra</groupId>
+            <artifactId>message-model</artifactId>
+            <version>${fixprotocol.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fixprotocol.orchestra</groupId>
+            <artifactId>repository</artifactId>
+            <version>${fixprotocol.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${base.java.version}</source>
+                    <target>${base.java.version}</target>
+                    <compilerArgs>
+                        <arg>--add-modules</arg>
+                        <arg>java.xml.bind</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-toolchains-plugin</artifactId>
+                <configuration>
+                    <toolchains>
+                        <jdk>
+                            <version>${base.java.version}</version>
+                        </jdk>
+                    </toolchains>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>toolchain</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
