@@ -6,64 +6,25 @@
 
     <groupId>de.beckdev.validation</groupId>
     <artifactId>quickfix-validator</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>model</module>
+        <module>validator</module>
+    </modules>
 
     <properties>
         <quickfixj.version>2.2.0</quickfixj.version>
         <fixprotocol.version>1.6.8</fixprotocol.version>
-        <base.java.version>13</base.java.version>
+        <base.java.version>11</base.java.version>
         <junit.version>5.7.0</junit.version>
         <maven.compiler.source>${base.java.version}</maven.compiler.source>
         <maven.compiler.target>${base.java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.quickfixj</groupId>
-            <artifactId>quickfixj-core</artifactId>
-            <version>${quickfixj.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.fixprotocol.orchestra</groupId>
-            <artifactId>interfaces</artifactId>
-            <version>${fixprotocol.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.fixprotocol.orchestra</groupId>
-            <artifactId>message-model</artifactId>
-            <version>${fixprotocol.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.fixprotocol.orchestra</groupId>
-            <artifactId>repository</artifactId>
-            <version>${fixprotocol.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>2.3.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <build>
-
-
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -71,14 +32,11 @@
                 <configuration>
                     <source>${base.java.version}</source>
                     <target>${base.java.version}</target>
-                    <compilerArgs>
-                        <arg>--add-modules</arg>
-                        <arg>java.xml.bind</arg>
-                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-toolchains-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
                     <toolchains>
                         <jdk>
@@ -94,10 +52,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
-
-
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.22.2</version>
