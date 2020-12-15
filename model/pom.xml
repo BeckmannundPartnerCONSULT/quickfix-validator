@@ -14,6 +14,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>generator</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>io.fixprotocol.orchestra</groupId>
             <artifactId>message-model</artifactId>
             <version>${fixprotocol.version}</version>
@@ -28,7 +34,7 @@
             <artifactId>quickfixj-core</artifactId>
             <version>${quickfixj.version}</version>
         </dependency>
-        <!-- not required for Java 8 -->
+
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -77,12 +83,30 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>io.fixprotocol.orchestra.quickfix.CodeGeneratorJ</mainClass>
+                    <mainClass>de.beckdev.quickfix.generator.CodeGeneratorJ</mainClass>
                     <arguments>
                         <argument>${project.basedir}/src/main/resources/OrchFIX50SP2EP264.xml</argument>
                         <argument>${project.build.directory}/generated-sources/java/</argument>
                     </arguments>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/java/</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

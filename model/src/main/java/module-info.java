@@ -1,7 +1,4 @@
-module de.beckdev.validation.model {
-    requires transitive orchesta.repository.qf;
+module model {
     requires quickfixj.core;
-    requires java.xml.bind;
-    requires java.xml;
-
+    exports quickfix.fix50sp2;
 }

@@ -11,6 +11,7 @@
     <modules>
         <module>model</module>
         <module>validator</module>
+        <module>generator</module>
     </modules>
 
     <properties>
