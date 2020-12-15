@@ -17,11 +17,18 @@ package de.beckdev.quickfix.validation;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ValidatorTest {
 
     @Test
-    public void validate() throws JAXBException {
-      QuickfixValidator.main(new String[]{""});
+    public void validate() throws JAXBException, URISyntaxException, IOException {
+        Path testfile = Paths.get(getClass().getResource("/FIX50SP2EP264.xml").toURI());
+        String path = testfile.toAbsolutePath().toString();
+        System.out.println(path);
+        QuickfixValidator.main(new String[]{path});
     }
 }
