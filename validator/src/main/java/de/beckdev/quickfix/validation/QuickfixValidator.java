@@ -1,5 +1,7 @@
 package de.beckdev.quickfix.validation;
 
+import de.beckdev.quickfix.field.TradSesStatus;
+import de.beckdev.quickfix.field.TradingSessionID;
 import io.fixprotocol._2020.orchestra.repository.MessageType;
 import io.fixprotocol._2020.orchestra.repository.Repository;
 import io.fixprotocol.orchestra.message.TestException;
@@ -24,8 +26,9 @@ public class QuickfixValidator {
         final SymbolResolver symbolResolver = new SymbolResolver();
         io.fixprotocol.orchestra.model.quickfix.QuickfixValidator validator = new io.fixprotocol.orchestra.model.quickfix.QuickfixValidator(repositoryAdapter, symbolResolver);
 
-
-        TradingSessionStatus message = unmarshalTradingSessionStatus(Paths.get(args[0]));
+        TradingSessionStatus message = new TradingSessionStatus();
+        message.set(new TradingSessionID(TradingSessionID.Day));
+        message.set(new TradSesStatus(TradSesStatus.Open));
         MessageType messageType = repositoryAdapter.getMessage("TradingSessionStatus", "base");
 
         try {
@@ -40,11 +43,5 @@ public class QuickfixValidator {
         JAXBContext jaxbContext = JAXBContext.newInstance(Repository.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         return (Repository) jaxbUnmarshaller.unmarshal(Files.newInputStream(inputFile));
-    }
-
-    private static TradingSessionStatus unmarshalTradingSessionStatus(Path inputFile) throws JAXBException, IOException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(TradingSessionStatus.class);
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        return (TradingSessionStatus) jaxbUnmarshaller.unmarshal(Files.newInputStream(inputFile));
     }
 }
