@@ -25,6 +25,6 @@ public class ValidatorTest {
 
     @Test
     public void validate() throws JAXBException, URISyntaxException, IOException, ClassNotFoundException {
-        QuickfixValidator.main(new String[]{Paths.get(getClass().getResource("/dummy.ser").toURI()).toAbsolutePath().toString()});
+        QuickfixValidator.main(new String[]{Paths.get(getClass().getResource("/dummy.txt").toURI()).toAbsolutePath().toString()});
     }
 }

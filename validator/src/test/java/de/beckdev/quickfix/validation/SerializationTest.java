@@ -5,7 +5,6 @@ import de.beckdev.quickfix.field.TradingSessionID;
 import org.junit.jupiter.api.Test;
 import quickfix.fix50sp2.TradingSessionStatus;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -29,7 +28,7 @@ public class SerializationTest {
         Files.createDirectories(dir);
 
         try (
-                OutputStream fos = Files.newOutputStream(dir.resolve("dummy.ser"));
+                OutputStream fos = Files.newOutputStream(dir.resolve("dummy.txt"));
                 ObjectOutputStream oos = new ObjectOutputStream(fos)
         ) {
             oos.writeObject(message);
