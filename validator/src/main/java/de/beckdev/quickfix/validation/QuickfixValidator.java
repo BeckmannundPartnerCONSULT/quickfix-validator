@@ -12,19 +12,26 @@ import quickfix.fix50sp2.TradingSessionStatus;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class QuickfixValidator {
-    public static final void main(String[] args) throws JAXBException, IOException, URISyntaxException {
+    public static final void main(String[] args) throws JAXBException, IOException, URISyntaxException, ClassNotFoundException {
         Repository repository = unmarshalRepository(Paths.get(QuickfixValidator.class.getResource("/OrchFIX50SP2EP264.xml").toURI()));
 
         RepositoryAccessor repositoryAdapter = new RepositoryAccessor(repository);
         final SymbolResolver symbolResolver = new SymbolResolver();
         io.fixprotocol.orchestra.model.quickfix.QuickfixValidator validator = new io.fixprotocol.orchestra.model.quickfix.QuickfixValidator(repositoryAdapter, symbolResolver);
+
+        try (
+                InputStream fis = Files.newInputStream(Paths.get(args[0]));
+                ObjectInputStream ois = new ObjectInputStream(fis)
+        ) {
+            ois.readObject();
+        }
 
         TradingSessionStatus message = new TradingSessionStatus();
         message.set(new TradingSessionID(TradingSessionID.Day));

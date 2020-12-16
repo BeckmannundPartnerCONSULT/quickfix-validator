@@ -19,11 +19,12 @@ import org.junit.jupiter.api.Test;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 
 public class ValidatorTest {
 
     @Test
-    public void validate() throws JAXBException, URISyntaxException, IOException {
-        QuickfixValidator.main(new String[]{});
+    public void validate() throws JAXBException, URISyntaxException, IOException, ClassNotFoundException {
+        QuickfixValidator.main(new String[]{Paths.get(getClass().getResource("/dummy.ser").toURI()).toAbsolutePath().toString()});
     }
 }
